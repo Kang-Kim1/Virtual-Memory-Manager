@@ -1,0 +1,85 @@
+_______________________________Design Document__________________________________
+
+Team Name: SoPro
+
+Team Members:
+1.) Andrew Chung
+UBID: 36329568
+Email: achung5@buffalo.edu
+
+2.) Changmin Park
+UBID: 50015911
+Email: cpark22@buffalo.edu
+
+3.) Kangmin Kim
+UBID: 50162357
+Email:kangmink@buffalo.edu
+
+___________________________________Data Structures________________________________
+
+1.) First In First Out(FIFO) Algorithm Implementation
+-  In general, the FIFO page replacement algorithm executes a page replacement based on the 
+oldest page. Beginning at the top of the page table, and replacing each frame as it descends 
+towards the end of the page table, it then returns to the beginning of the page table and repeats
+the process.
+
+I.) void fifo_algorithm()
+	- int* fifo_frame = (int*) calloc(frame_num, sizeof(int)); 
+		- Serves as the page table.
+	- int empty_frame = 0;
+		- Mimics the "missing page" indicator.
+		- Determines if a slot on the page table is free.
+		- Places current page observed into the fifo_frame and time_frame, in order to keep
+		track of a pages time in the page table.
+		- Takes into consideration the "missing page" and "page replacements", to indicate
+		the total page faults.
+	- int* time_frame = (int*) calloc(frame_num, sizeof(int));
+		- Mimics the "page replacement" indicator.
+		- Responsible for replacing pages in a specific frame that is deemed
+		old, to accomodate a new page that is necessary at the time.
+
+2.) Optimal Replacement Algorithm Implementation
+- In general, the Optimal page replacement algorithm executes a page replacement based on the
+page that will not be used for the longest period of time. For every page replacement the entire page
+table is considered, in which the reference string is referred to in order to find the page that happens
+the take the longest period of time to be referenced again.
+
+I.) void optimal_algorithm()
+	- int* opt_frame = (int*) calloc(frame_num, sizeof(int));
+		- Serves as the page table.
+	- opt_pagefault=0;
+		- Takes into consideration the "missing page" and "page replacements", to indicate
+		the total page faults.
+	- int empty_frame = 0;
+		- Mimics the "missing page" indicator.
+		- Determines if a slot on the page table is free.
+		- Places current page observed into the opt_frame, in order to keep
+		track its placement in the page table
+		- Takes into consideration the "missing page" and "page replacements", to indicate
+		the total page faults.
+
+_______________________________Advantage and Disadvantanges_______________________________
+
+Advantage
+1.) (FIFO): The use of a time_frame to be able to determine a pages lifespan within the page table. Presents more
+reliable information when progressing through the page table and carrying out page replacements. In addition,
+it assists in determining the difference between a missing page and page replacement.
+2.) (Optimal Page Replacement): The following code is a simple implementation that carries out the page replacement. 
+			if(i == page_num_count-1){
+            	pt_frame[0] = cur_page;
+				continue; 
+			
+Disadvantage
+1.) (FIFO): This algorithm is known for its poor performance and exposure to Beladys effects.
+2.) (Optimal Page Replacement): General disadvantage is that it requires you to be able to fortell the
+future, so this algorithm isn't widely used.
+___________________________________Citations______________________________________________
+
+1.) Project 2 description.
+2.) Lecture notes on virtual memory.
+
+
+
+
+
+
